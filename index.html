@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Whodunit Chamber</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="page-bg" id="pageBg"></div>
+    <div id="promoPopup" class="popup-overlay">
+        <div class="popup-container">
+            <div class="popup-left">
+                <img src="assets/voice.gif" alt="Promo GIF">
+            </div>
+            <div class="popup-right">
+                <h2>New game!</h2>
+                <h3>Requiem of Revenge</h3>
+                <p class="popup-english">"Requiem of Revenge" is now available! <br> Mind-blowing twists, hurry up and
+                    join!</p>
+                <button class="close-btn" id="popupInnerClose">Got it!</button>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg sticky-top custom-navbar">
+        <div class="container-fluid">
+            <div class="logo">
+                <h1 class="navbar-brand">Whodunit Chamber</h1>
+                <p class="tagline">Detective Game · Escape Room</p>
+            </div>
+            <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#home">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#secret-hub">Intelligence</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#library">Library</a></li>
+                    <!-- Dropdown menu for Amazing Presentation -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="amazingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Amazing Presentation
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="amazingDropdown">
+                            <li><a class="dropdown-item" href="#game-sessions">Case Sessions</a></li>
+                            <li><a class="dropdown-item" href="#clutch-moments">Clutch Moments</a></li>
+                        </ul>
+                    </li>
+                    <!-- Dropdown menu for Information Guide -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="infoGuideDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Information Guide
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="infoGuideDropdown">
+                            <li><a class="dropdown-item" href="#activities">Bulletin</a></li>
+                            <li><a class="dropdown-item" href="#primer-section">Primer</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="connectDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Connect
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="connectDropdown">
+                            <li><a class="dropdown-item" href="#join-shop">Collaborate</a></li>
+                            <li><a class="dropdown-item" href="#footer">Footer</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home" class="section">
+            <div class="home-container">
+                <div class="video-background-section">
+                    <div class="search-box">
+                        <input type="text" id="homeSearchInput" placeholder="Search scripts or escape rooms...">
+                        <div class="search-hint" id="searchHint">Try searching: Mist of the East River, Yi Shu, WULA WULA</div>  <!-- We were only able to find images of these characters from the games. -->
+                    </div>
+                    <div class="video-content-wrapper">
+                        <div class="video-wrapper">
+                            <video id="promoVideo" controls autoplay muted loop playsinline>
+                                <source src="assets/mv.mp4" type="video/mp4">
+                            </video>
+                            <div class="more-content-link">
+                                <a href="#" id="moreContentLink" class="category-link">More exciting content →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-ranking-wrapper">
+                    <div class="carousel-section">
+                        <div class="category-header">
+                            <h3>In-Game Moments</h3>
+                            <a href="#library" class="category-link" id="viewAllLink">View All →</a>
+                        </div>
+                        <div id="carousel" class="carousel-container">
+                            <div class="carousel-slides" id="carouselSlides"></div>
+                            <button class="carousel-btn prev" id="prevBtn">❮</button>
+                            <button class="carousel-btn next" id="nextBtn">❯</button>
+                            <div class="carousel-dots" id="carouselDots"></div>
+                        </div>
+                    </div>
+
+                    <div class="ranking-section">
+                        <div class="ranking-header">
+                            <h3>🔥 Top 10 Storylines</h3>
+                        </div>
+                        <div class="ranking-scroll-container" id="rankingScrollContainer">
+                            <div class="ranking-list" id="rankingList"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="secret-hub" class="section">
+            <div class="home-container">
+                <h2 class="section-title">Intelligence Hub</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Pro Tips</h3>
+                        <div class="feature-tips">
+                            <p><span class="arrow">▸</span> Read timelines and relationships carefully</p>
+                            <p><span class="arrow">▸</span> Click on items to find hidden evidence</p>
+                            <p><span class="arrow">▸</span> Private chats reveal contradictions</p>
+                            <p><span class="arrow">▸</span> Watch for inconsistent alibis — someone always slips</p>
+                            <p><span class="arrow">▸</span> Take notes on suspicious behavior patterns</p>
+                            <p><span class="arrow">▸</span> Revisit early clues after new revelations</p>
+                            <p><span class="arrow">▸</span> Question motives, not just means and opportunity</p>
+                            <p><span class="arrow">▸</span> Cross reference witness statements for discrepancies</p>
+                            <p><span class="arrow">▸</span> Don't be afraid to ask the DM — they're here to help you learn</p>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Role Preview</h3>
+                        <div class="reader-selector">
+                            <select id="demoScriptSelect">
+                                <option value="0">The sea is a rain</option>
+                                <option value="1">Sister Drum</option>
+                                <option value="2">Yoko Yamada</option>
+                                <option value="3">Dunes, roses, bitter moon</option>
+                                <option value="4">WULA WULA</option>
+                            </select>
+                        </div>
+                        <div class="character-gallery" id="characterGallery"></div>
+                        <div class="character-detail" id="characterDetail"></div>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Discussion Corner</h3>
+                        <div class="discuss-posts" id="discussPosts">
+                            <div class="post-item">
+                                <strong>@DetectiveYuan</strong> · 2h ago<br>
+                                The butler was the killer! But the clock tower clue doesn't match...
+                                <div class="post-actions"></div>
+                            </div>
+                            <div class="post-item">
+                                <strong>@XuPlayer</strong> · 5h ago<br>
+                                "Dunes, roses" made me cry. That final letter...
+                                <div class="post-actions"></div>
+                            </div>
+                            <div class="post-item">
+                                <strong>@Yang Eric</strong> · yesterday<br>
+                                Pro tip: Check movement maps during second investigation phase.
+                                <div class="post-actions"></div>
+                            </div>
+                        </div>
+                        <div class="add-post">
+                            <input type="text" id="newPostInput" placeholder="Share your thoughts...">
+                            <button id="publishPostBtn">Post</button>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Gameplay Record Area</h3>
+                        <div class="feed-list" id="feedList">
+                            <div class="feed-item">
+                                <strong>@YuanWenze</strong> completed "Mist of East River" 
+                                <div class="feed-time">5 min ago · agree 16</div>
+                            </div>
+                            <div class="feed-item">
+                                <strong>@XuHanyi</strong> escaped "Red & Black Mansion" 
+                                <div class="feed-time">1 hour ago · agree 42</div>
+                            </div>
+                            <div class="feed-item">
+                                <strong>@YangShuqi</strong> joined "Beginner Free Session" 
+                                <div class="feed-time">3 hours ago · agree 7</div>
+                            </div>
+                        </div>
+                        <div class="add-feed">
+                            <input type="text" id="newFeedInput" placeholder="Share your experience...">
+                            <button id="publishFeedBtn">Post</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="library" class="section">
+            <div class="library-container">
+                <h2>Library</h2>
+                <div class="game-type-switch">
+                    <button class="game-type-btn active" data-game="script">Script Murder</button>
+                    <button class="game-type-btn" data-game="escape">Escape Room</button>
+                </div>
+                <div class="filters">
+                    <div class="filter-group"><label class="filter-label">Type:</label>
+                        <div class="filter-buttons" id="typeFilter"></div>
+                    </div>
+                    <div class="filter-group"><label class="filter-label">Players:</label>
+                        <div class="filter-buttons" id="playersFilter">
+                            <button class="filter-chip active" data-players="all">All</button>
+                            <button class="filter-chip" data-players="4-5">4-5</button>
+                            <button class="filter-chip" data-players="6-7">6-7</button>
+                            <button class="filter-chip" data-players="8-9">8-9</button>
+                            <button class="filter-chip" data-players="10+">10+</button>
+                        </div>
+                    </div>
+                    <div class="filter-group"><label class="filter-label">Difficulty:</label>
+                        <div class="filter-buttons" id="difficultyFilter">
+                            <button class="filter-chip active" data-difficulty="all">All</button>
+                            <button class="filter-chip" data-difficulty="beginner">Beginner</button>
+                            <button class="filter-chip" data-difficulty="intermediate">Intermediate</button>
+                            <button class="filter-chip" data-difficulty="expert">Expert</button>
+                        </div>
+                    </div>
+                    <div class="filter-group search-group"><label class="filter-label">Search:</label><input type="text"
+                            id="searchInput" placeholder="Enter name..."></div>
+                </div>
+                <div class="script-grid" id="allScriptsGrid"></div>
+            </div>
+        </section>
+        <section id="game-sessions" class="section">
+            <div class="library-container">
+                <h2>Case Sessions</h2>
+                <div class="game-sessions-wrapper">
+                    <div class="sessions-left">
+                        <h3>Upcoming Sessions</h3>
+                        <div id="sessionList" class="session-list"></div>
+                    </div>
+                    <div class="form-right">
+                        <h3>Create New Game Session</h3>
+                        <form id="publishSessionForm">
+                            <label>Game Type:
+                                <select name="gameType">
+                                    <option value="script">Script Murder</option>
+                                    <option value="escape">Escape Room</option>
+                                </select>
+                            </label>
+                            <label>Name:
+                                <input type="text" name="scriptName">
+                                <span class="error-msg" data-field="scriptName"></span>
+                            </label>
+                            <label>Date:
+                                <input type="date" name="date">
+                                <span class="error-msg" data-field="date"></span>
+                            </label>
+                            <label>Time:
+                                <input type="time" name="time">
+                                <span class="error-msg" data-field="time"></span>
+                            </label>
+                            <label>Location:
+                                <input type="text" name="location">
+                                <span class="error-msg" data-field="location"></span>
+                            </label>
+                            <label>Total Slots:
+                                <input type="number" name="slots" min="1" max="20">
+                                <span class="error-msg" data-field="slots"></span>
+                            </label>
+                            <label>Price (¥):
+                                <input type="number" name="price" step="1">
+                                <span class="error-msg" data-field="price"></span>
+                            </label>
+                            <label>Notes:
+                                <textarea name="remark"></textarea>
+                            </label>
+                            <button type="submit">Publish Session</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="clutch-moments" class="section">
+            <div class="library-container">
+                <h2>Clutch Moments</h2>
+                <div class="clutch-grid">
+                    <div class="clutch-item">
+                        <video controls autoplay muted loop playsinline>
+                            <source src="assets/role-playing_game_video.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="clutch-item">
+                        <video controls autoplay muted loop playsinline>
+                            <source src="assets/The_Story_E03_250730_1.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="clutch-item">
+                        <video controls autoplay muted loop playsinline>
+                            <source src="assets/thestory2003.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="clutch-item">
+                        <video controls autoplay muted loop playsinline>
+                            <source src="assets/The_Story_Escape_Room.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="activities" class="section">
+            <div class="library-container">
+                <h2>Bulletin</h2>
+                <article class="event">
+                    <h3>Weekend Beginner Free Session</h3>
+                    <p>April 26, 14:00 | Pro DM guides new players</p>
+                </article>
+                <article class="event">
+                    <h3>"Script Murder Encyclopedia" Quiz</h3>
+                    <p>Online quiz to win free game vouchers</p>
+                </article>
+                <article class="event">
+                    <h3>Weekend Puzzle Rush</h3>
+                    <p>May 3 to May 5 | Solve 3 mini mysteries in 60 minutes and Top 3 win store credits</p>
+                </article>
+
+                <div class="two-columns">
+                    <div class="glossary">
+                        <h4>Script Murder Terms</h4>
+                        <table class="terms-table">
+                            <tr><th>Term</th><th>Meaning</th></tr>
+                            <tr><td><strong>DM</strong></strong></td><td>Game Master</td></tr>
+                            <tr><td><strong>NPC</strong></td><td>Non-Player Character</td></tr>
+                            <tr><td><strong>Pusher</strong></td><td>Logical thinker</td></tr>
+                            <tr><td><strong>Water Faucet</strong></td><td>Emotional player</td></tr>
+                            <tr><td><strong>Clue</strong></td><td>Key information that moves the investigation forward</td></tr>
+                            <tr><td><strong>Red Herring</strong></td><td>Misleading clue designed to distract</td></tr>
+                            <tr><td><strong>Alibi</strong></td><td>Proof that a suspect was elsewhere during the crime</td></tr>
+                            <tr><td><strong>Motive</strong></td><td>Reason a character would want to commit the crime</td></tr>
+                        </table>
+                    </div>
+                    <div class="achievements-scroll">
+                        <h4>🏆 Player Level</h4>
+                        <ul class="achievement-split-list">
+                            <li>
+                                <span class="achievement-name">🔎 The All-Seeing Eye</span>
+                                <span class="achievement-desc">The beginning is the ending.</span>
+                            </li>
+                            <li>
+                                <span class="achievement-name">The Hammer</span>
+                                <span class="achievement-desc">No wasted words. Points at the killer, breaks the lock, ends the debate.</span>
+                            </li>
+                            <li>
+                                <span class="achievement-name">The Latecomer</span>
+                                <span class="achievement-desc">Sleeps through the first half, then suddenly sits up. Gets half of it right</span>
+                            </li>
+                            <li>
+                                <span class="achievement-name">The Dud</span>
+                                <span class="achievement-desc">Busy but useless</span>
+                            </li>
+                            <li>
+                                <span class="achievement-name">The Lost Pup</span>
+                                <span class="achievement-desc">I was completely confused throughout, a complete novice.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="primer-section" class="section">
+            <div class="library-container">
+                <h2>Primer</h2>
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header-btn" data-target="collapseOne">What is a script murder game?</button>
+                        <div id="collapseOne" class="accordion-body">Script murder is a role-playing deduction game where players act out assigned characters, search for clues, and try to solve a murder mystery...</div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header-btn" data-target="collapseTwo">How long does a typical game last?</button>
+                        <div id="collapseTwo" class="accordion-body">Most games take 4-6 hours, depending on the complexity. Some escape rooms are 60-120 minutes.</div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header-btn" data-target="collapseThree">Do I need to prepare anything beforehand?</button>
+                        <div id="collapseThree" class="accordion-body">Just bring your curiosity! No experience needed — the Game Master will explain the rules.</div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header-btn" data-target="collapseFour">Can I join a session alone?</button>
+                        <div id="collapseFour" class="accordion-body">Yes! Many sessions have open slots for solo players. Use the "Case Sessions" page to find groups.</div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header-btn" data-target="collapseFive">What is the difference between Script Murder and Escape Room?</button>
+                        <div id="collapseFive" class="accordion-body">Script murder focuses on role-playing and deduction. Escape rooms emphasize puzzle-solving and physical exploration.</div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header-btn" data-target="collapseSix">Are there discounts for large groups?</button>
+                        <div id="collapseSix" class="accordion-body">Yes! Family packs and group discounts are available. Check the "Join Shop" page for partnership offers.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="join-shop" class="section">
+            <div class="library-container">
+                <h2>Collaborate</h2>
+                <div class="alliance-grid">
+                    <div class="alliance-info">
+                        <h3>Join the Investigation</h3>
+                        <p>Partner with Whodunit Chamber to bring your scripts and escape rooms to a growing community of detectives. Let's solve mysteries together.</p>
+                        <div class="perk-list">
+                            <span>Featured placement</span>
+                            <span>Analytics dashboard</span>
+                            <span>Marketing support</span>
+                            <span>Dedicated support</span>
+                        </div>
+                    </div>
+                    <div class="alliance-form">
+                        <form id="shopForm">
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="shopName">Shop Name</label>
+                                    <input type="text" id="shopName" name="shopName" placeholder="e.g. Mystery Club">
+                                    <span class="error-msg" data-field="shopName"></span>
+                                </div>
+                                <div class="form-field">
+                                    <label for="phone">📞 Contact</label>
+                                    <input type="tel" id="phone" name="phone" placeholder="Phone number">
+                                    <span class="error-msg" data-field="phone"></span>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="address">Address</label>
+                                    <input type="text" id="address" name="address" placeholder="Full address">
+                                    <span class="error-msg" data-field="address"></span>
+                                </div>
+                                <div class="form-field">
+                                    <label for="intention">Partnership Type</label>
+                                    <select id="intention" name="intention">
+                                        <option value="">-- Please select --</option>
+                                        <option>Session Collaboration</option>
+                                        <option>Script Licensing</option>
+                                        <option>Event Sponsorship</option>
+                                    </select>
+                                    <span class="error-msg" data-field="intention"></span>
+                                </div>
+                            </div>
+                            <div class="form-field full-width">
+                                <label for="intro">Introduction (Optional)</label>
+                                <textarea id="intro" name="intro" rows="3" placeholder="Tell us about your shop..."></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Submit Application</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="vue-app" class="section">
+            <div class="library-container">
+                <h2>Subscribe to Our Newsletter</h2>
+                <div class="vue-newsletter">
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <input type="text" v-model="name" placeholder="Enter your name" @focus="clearError('name')">
+                        <span v-show="nameError" class="vue-error">Name is required</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" v-model="email" placeholder="Enter your email" @focus="clearError('email')">
+                        <span v-show="emailError" class="vue-error">Valid email is required</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Interested in:</label>
+                        <select v-model="interest">
+                            <option v-for="opt in interestOptions" :value="opt.value">{{ opt.label }}</option>
+                        </select>
+                    </div>
+                    <button @click="subscribe" :disabled="isSubmitting">Subscribe</button>
+                    <div v-if="showSuccess" class="vue-success">Thank you for subscribing, {{ name }}!</div>
+                    <div v-else-if="showError" class="vue-error-msg">Please fill all fields correctly.</div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div id="footer" class="footer-info">
+            <p>2026 Whodunit Chamber Detective Game · Escape Room platform | Find your perfect script buddy</p>
+            <p>Contact: <a href="mailto:support@whodunitchamber.com" class="footer-link">support@whodunitchamber.com</a> | <a href="https://example.com/about" target="_blank" class="footer-link">About Us</a></p>
+        </div>
+    </footer>
+    <div id="scriptDetailModal" class="detail-modal">
+        <div class="detail-modal-content">
+            <span class="detail-modal-close">&times;</span>
+            <img id="modalDetailImage" src="" alt="Script Image">
+            <h2 id="modalDetailName"></h2>
+            <p id="modalDetailDesc"></p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
